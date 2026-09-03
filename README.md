@@ -1,14 +1,14 @@
 <div align="center">
 
-<img src="./assets/gbit-container-logo.png" alt="GBIT CLI Gbit container" width="400"/>
+<img src="./assets/gbit-container-logo.png" alt="GBIT CLI Gbit container" width="800"/>
 
-# GBit Container v0.0.0.1
+# GBit Container v0.0.1
 
 **Orquestrador de Processos Nativo — Zero Docker, Zero Podman, Zero Dependências Externas**
 
 ![GBit Ecossistema](https://img.shields.io/badge/GBit-Ecossistema-8A2BE2?style=for-the-badge&logo=github)
 ![Camada Orchestrator](https://img.shields.io/badge/Camada-Process%20Orchestrator-00D2FF?style=for-the-badge)
-![Versão](https://img.shields.io/badge/gbit--container-v0.0.0.1-brightgreen?style=for-the-badge)
+![Versão](https://img.shields.io/badge/gbit--container-v0.0.1-brightgreen?style=for-the-badge)
 ![CLI](https://img.shields.io/badge/CLI-Native%20Tool-orange?style=for-the-badge&logo=gnu-bash)
 
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
@@ -41,7 +41,7 @@ Funciona como **PM2 + Foreman** — levante stacks inteiras com um comando, moni
 npx gbit-container
 
 
-# GBit Container v1.0.0
+# GBit Container v0.0.1
 
 **Orquestrador de Processos Nativo — Zero Docker, Zero Podman, Zero Dependências Externas**
 
@@ -122,7 +122,7 @@ Veja os 15+ templates disponíveis e escolha um:
 | `nats-streaming` | NATS Server com Streaming para mensageria leve |
 | `ai-fullstack` | Stack AI com FastAPI + Ollama + Qdrant + Redis + Streamlit |
 
-## opcao stack  gbit-db 
+## Opcao stack  gbit-db 
 
 ```bash
 npx gbit-db "my-project"
@@ -343,8 +343,24 @@ gbit-container/
 
 ## .gbit/ (Dados do Projeto)
 
-Ao rodar `gbit-container up`, o diretório `.gbit/` é criado automaticamente:
+### 1. Inicializar um projeto (gera `gbit.yml` + `.env.gbit`)
 
+```bash
+gbit-container init --stack gbit-db --force
+```
+
+Isso cria os arquivos de configuração no diretório atual — ainda não sobe nenhum serviço:
+- `gbit.yml` — define os serviços (app, database, portal, etc.)
+- `.env.gbit` — variáveis de ambiente do projeto
+- arquivos de exemplo do stack escolhido (Dockerfile, package.json, etc.)
+
+### 2. Subir os serviços
+
+```bash
+gbit-container up
+```
+
+Só a partir daqui o ProcessEngine sobe e cria a pasta `.gbit/` automaticamente:
 ```
 .gbit/
 ├── pids.json          # {"api:1": 12345, "worker:1": 12346, ...}
