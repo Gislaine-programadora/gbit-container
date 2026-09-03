@@ -18,7 +18,7 @@
 ![GBit DB Dados](https://img.shields.io/badge/Database-gbit--db--dados-4169E1?style=for-the-badge&logo=postgresql)
 
 </div>
-
+# <img src="https://img.shields.io/npm/v/gbit-container?style=for-the-badge&label=npm&color=CB3837&logo=npm&logoColor=white" alt="npm version" valign="middle"> GBIT CONTAINER
 ---
 
 ## O que é?
@@ -31,7 +31,11 @@ Funciona como **PM2 + Foreman** — levante stacks inteiras com um comando, moni
 
 📦 [Pacote no NPM](https://www.npmjs.com/package/gbit-container) · 💻 [Repositório no GitHub](https://github.com/Gislaine-programadora)
 
+<div align="center">
 
+[![Website GitHub Pages](https://img.shields.io/badge/🌐_Acessar_Landing_Page-github.io-2ea44f?style=for-the-badge&logo=githubpages&logoColor=white)](https://gislaine-programadora.github.io/gbit-container/)
+
+</div>
 
 ## Instalação
 
@@ -407,6 +411,17 @@ gbit-container dashboard --port 3000
 | Persistência de PID | Sim | Sim | Não | Não aplica |
 
 ---
+
+## Banco de dados: `gbit-db-dados` integrado ao backend
+
+<p align="center">
+  <img src="assets/imagem-modo-uso-dados.png" alt="gbit-db-dados integrado ao backend" width="920">
+</p>
+
+O `gbit-db-dados` roda dentro do próprio `gbit-database` — não é um serviço separado que você precisa conectar. Assim que o servidor sobe na porta `4200`, o banco já está funcionando.
+
+
+
 
 ## Requisitos
 
