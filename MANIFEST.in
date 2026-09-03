@@ -1,0 +1,5 @@
+recursive-include gbit_container/templates *
+recursive-include gbit_container/dashboard/templates *.html
+recursive-include gbit_container/dashboard/static *
+include README.md
+include pyproject.toml

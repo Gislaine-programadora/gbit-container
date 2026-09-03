@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# gbit-container — Modern native process orchestrator (zero Docker/Podman)
+# Entry point script
+
+set -e
+
+# Resolve the directory where this script lives
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Prefer an active virtualenv / conda env python if available
+if [ -n "$VIRTUAL_ENV" ] && [ -x "$VIRTUAL_ENV/bin/python" ]; then
+    PYTHON="$VIRTUAL_ENV/bin/python"
+elif [ -n "$CONDA_PREFIX" ] && [ -x "$CONDA_PREFIX/bin/python" ]; then
+    PYTHON="$CONDA_PREFIX/bin/python"
+else
+    PYTHON="$(command -v python3 || command -v python)"
+fi
+
+if [ -z "$PYTHON" ]; then
+    echo "Error: Python 3 is required but not found." >&2
+    exit 1
+fi
+
+# Export GBIT_CWD so the Python CLI can use it as a reliable fallback.
+# This ensures the correct project directory is detected even when
+# the shell or Python's os.getcwd() returns the wrong path.
+export GBIT_CWD="$(pwd)"
+
+# Run the CLI module
+exec "$PYTHON" -m gbit_container.cli.main "$@"

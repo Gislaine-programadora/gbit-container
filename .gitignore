@@ -1,0 +1,42 @@
+# Banco de dados local e logs
+*.sqlite
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignorar todos os arquivos armazenados dos usuários
+**/backend/storage/
+backend/storage/
+
+
+# Dependências
+node_modules/
+**/node_modules/
+
+# Next.js e Build
+.next/
+out/
+build/
+
+# Configurações locais e segredos
+.env
+.env.local
+.env.production
+.env.development.local
+
+# --- ARQUIVOS DE DADOS DO BACKEND ---
+# Ignoramos a pasta onde os projetos enviados ficam guardados, 
+# para o repositório não ficar gigante e cheio de códigos de teste.
+backend/data/
+gbitcode-platform/backend/data/
+
+# --- ARQUIVOS DE CONTRATOS INTELIGENTES (Blockchain) ---
+# Se você testar projetos Solidity, ignore os arquivos gerados automaticamente
+artifacts/
+cache/
+typechain/
+typechain-types/
+
+# Logs e arquivos de sistema
+*.log
+.DS_Store

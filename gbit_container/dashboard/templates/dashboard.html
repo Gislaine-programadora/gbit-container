@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GBit Container Dashboard</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 40 40" fill="none">
+                        <rect x="2" y="2" width="36" height="36" rx="8" stroke="#00d4ff" stroke-width="2"/>
+                        <path d="M12 14h6v6h-6zM22 14h6v6h-6zM12 24h6v6h-6zM22 24h6v6h-6z" fill="#00d4ff" opacity="0.6"/>
+                        <path d="M14 20h12v2h-12z" fill="#00d4ff" opacity="0.3"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-title">GBit</span>
+                    <span class="logo-subtitle">Container</span>
+                </div>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active" data-page="overview">
+                <i class="fas fa-th-large"></i>
+                <span>Overview</span>
+            </a>
+            <a href="#" class="nav-item" data-page="containers">
+                <i class="fas fa-cube"></i>
+                <span>Containers</span>
+            </a>
+            <a href="#" class="nav-item" data-page="services">
+                <i class="fas fa-layer-group"></i>
+                <span>Services</span>
+            </a>
+            <a href="#" class="nav-item" data-page="runtimes">
+                <i class="fas fa-terminal"></i>
+                <span>Runtimes</span>
+            </a>
+            <a href="#" class="nav-item" data-page="volumes">
+                <i class="fas fa-database"></i>
+                <span>Data Volumes</span>
+            </a>
+            <a href="#" class="nav-item" data-page="networks">
+                <i class="fas fa-network-wired"></i>
+                <span>Network</span>
+            </a>
+            <a href="#" class="nav-item" data-page="apis">
+                <i class="fas fa-plug"></i>
+                <span>APIs</span>
+            </a>
+            <a href="#" class="nav-item" data-page="logs">
+                <i class="fas fa-file-alt"></i>
+                <span>Logs</span>
+            </a>
+            <a href="#" class="nav-item" data-page="stacks">
+                <i class="fas fa-layer-group"></i>
+                <span>Stacks</span>
+            </a>
+            <a href="#" class="nav-item" data-page="settings">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="system-status">
+                <div class="status-indicator">
+                    <span class="status-dot" id="engine-status"></span>
+                    <span class="status-text" id="engine-status-text">ProcessEngine</span>
+                </div>
+            </div>
+            <div class="version-info">v{{ version }}</div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="menu-toggle" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title" id="page-title">Overview</h1>
+            </div>
+            <div class="topbar-right">
+                <div class="action-buttons">
+                    <button class="btn btn-action btn-up" id="btn-up" title="Start Services">
+                        <i class="fas fa-play"></i>
+                        <span>Up</span>
+                    </button>
+                    <button class="btn btn-action btn-down" id="btn-down" title="Stop Services">
+                        <i class="fas fa-stop"></i>
+                        <span>Down</span>
+                    </button>
+                    <button class="btn btn-action btn-restart" id="btn-restart" title="Restart Services">
+                        <i class="fas fa-redo"></i>
+                        <span>Restart</span>
+                    </button>
+                    <button class="btn btn-action btn-build" id="btn-build" title="Install Dependencies">
+                        <i class="fas fa-hammer"></i>
+                        <span>Build</span>
+                    </button>
+                </div>
+                <button class="btn btn-refresh" id="btn-refresh" title="Refresh">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Page Content -->
+        <div class="content-area">
+            <!-- Overview Page -->
+            <div class="page active" id="page-overview">
+                <!-- System Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-microchip"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="cpu-percent">0%</span>
+                            <span class="stat-label">CPU Usage</span>
+                        </div>
+                        <div class="stat-bar"><div class="stat-bar-fill" id="cpu-bar"></div></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-memory"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="mem-percent">0%</span>
+                            <span class="stat-label">Memory Usage</span>
+                        </div>
+                        <div class="stat-bar"><div class="stat-bar-fill" id="mem-bar"></div></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-hdd"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="disk-percent">0%</span>
+                            <span class="stat-label">Disk Usage</span>
+                        </div>
+                        <div class="stat-bar"><div class="stat-bar-fill" id="disk-bar"></div></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-cube"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="container-count">0</span>
+                            <span class="stat-label">Processes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Status -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-rocket"></i> Project Status</h2>
+                        <span class="badge" id="project-status-badge">Loading...</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="project-info" id="project-info">
+                            <div class="info-row">
+                                <span class="info-label">Project Name</span>
+                                <span class="info-value" id="project-name">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Status</span>
+                                <span class="info-value" id="project-status">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Services Running</span>
+                                <span class="info-value" id="services-running">0 / 0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Container Quick View -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-cubes"></i> Processes</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="container-grid" id="container-grid">
+                            <!-- Filled by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Containers Page -->
+            <div class="page" id="page-containers">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-cube"></i> All Containers</h2>
+                        <div class="header-actions">
+                            <select class="filter-select" id="container-filter">
+                                <option value="all">All</option>
+                                <option value="running">Running</option>
+                                <option value="stopped">Stopped</option>
+                                <option value="paused">Paused</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table" id="containers-table">
+                            <thead>
+                                <tr>
+                                    <th>Status</th>
+                                    <th>Name</th>
+                                    <th>Service</th>
+                                    <th>Command / Runtime</th>
+                                    <th>Ports</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="containers-tbody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Services Page -->
+            <div class="page" id="page-services">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-layer-group"></i> Services Configuration</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="services-list" id="services-list">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Runtimes Page -->
+            <div class="page" id="page-runtimes">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-terminal"></i> Service Runtimes</h2>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table" id="runtimes-table">
+                            <thead>
+                                <tr>
+                                    <th>Service</th>
+                                    <th>Command</th>
+                                    <th>Runtime</th>
+                                </tr>
+                            </thead>
+                            <tbody id="runtimes-tbody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Volumes Page -->
+            <div class="page" id="page-volumes">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-database"></i> Data Volumes</h2>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table" id="volumes-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Driver</th>
+                                </tr>
+                            </thead>
+                            <tbody id="volumes-tbody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Networks Page -->
+            <div class="page" id="page-networks">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-network-wired"></i> Network</h2>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table" id="networks-table">
+                            <thead>
+                                <tr>
+                                    <th>Service</th>
+                                    <th>Port</th>
+                                    <th>URL</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="networks-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- APIs Page -->
+            <div class="page" id="page-apis">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-plug"></i> APIs</h2>
+                        <button class="btn btn-sm btn-secondary" id="btn-refresh-apis">
+                            <i class="fas fa-sync"></i> Refresh
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table" id="apis-table">
+                            <thead>
+                                <tr>
+                                    <th>Service</th>
+                                    <th>Base URL</th>
+                                    <th>Root ("/")</th>
+                                    <th>Latency</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="apis-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <div class="card-header">
+                        <h2><i class="fas fa-terminal"></i> API Tester</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="api-tester-form">
+                            <select class="filter-select" id="api-test-service">
+                                <option value="">Select service...</option>
+                            </select>
+                            <select class="filter-select" id="api-test-method">
+                                <option>GET</option>
+                                <option>POST</option>
+                                <option>PUT</option>
+                                <option>DELETE</option>
+                                <option>PATCH</option>
+                            </select>
+                            <input type="text" class="filter-select" id="api-test-path"
+                                   placeholder="/health" style="flex: 1; min-width: 160px;" value="/">
+                            <button class="btn btn-sm btn-primary" id="btn-send-api-test">
+                                <i class="fas fa-paper-plane"></i> Send
+                            </button>
+                        </div>
+                        <pre class="log-content" id="api-test-result" style="margin-top: 12px;">Escolha um servico, um metodo e um caminho (ex: /health, /api/status) e clique em Send.</pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logs Page -->
+            <div class="page" id="page-logs">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-file-alt"></i> Process Logs</h2>
+                        <div class="header-actions">
+                            <select class="filter-select" id="log-service-select">
+                                <option value="">Select service...</option>
+                            </select>
+                            <button class="btn btn-sm btn-secondary" id="btn-load-logs">Load</button>
+                            <button class="btn btn-sm btn-secondary" id="btn-clear-logs">Clear</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="log-viewer" id="log-viewer">
+                            <pre class="log-content" id="log-content">Select a service to view logs...</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stacks Page -->
+            <div class="page" id="page-stacks">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-layer-group"></i> Stack Templates</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="stacks-grid" id="stacks-grid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Page -->
+            <div class="page" id="page-settings">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-cog"></i> Settings</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="settings-section">
+                            <h3>System Information</h3>
+                            <div class="settings-info" id="system-info">
+                            </div>
+                        </div>
+                        <div class="settings-section">
+                            <h3>Configuration (gbit.yml)</h3>
+                            <div class="config-viewer">
+                                <pre id="config-yaml">Loading...</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <span class="loading-text">Processing...</span>
+        </div>
+    </div>
+
+    <script src="/static/js/dashboard.js"></script>
+</body>
+</html>

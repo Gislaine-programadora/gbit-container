@@ -1,0 +1,442 @@
+Metadata-Version: 2.4
+Name: gbit-container
+Version: 0.0.1
+Summary: GBit Container — Modern native process orchestrator (zero Docker/Podman)
+Author: GBit
+License: MIT
+Project-URL: Homepage, https://github.com/gbit-container/gbit-container
+Keywords: process-manager,subprocess,orchestrator,cli,pm2-like,foreman,procfile,devtools
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: Topic :: System :: Systems Administration
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: click>=8.0
+Requires-Dist: rich>=13.0
+Requires-Dist: flask>=3.0
+Requires-Dist: pyyaml>=6.0
+Requires-Dist: psutil>=5.9
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0; extra == "dev"
+Requires-Dist: ruff>=0.1; extra == "dev"
+Dynamic: license-file
+
+<div align="center">
+
+<img src="./assets/gbit-container-logo.png" alt="GBIT CLI Gbit container" width="400"/>
+
+# GBit Container v0.0.0.1
+
+**Orquestrador de Processos Nativo — Zero Docker, Zero Podman, Zero Dependências Externas**
+
+![GBit Ecossistema](https://img.shields.io/badge/GBit-Ecossistema-8A2BE2?style=for-the-badge&logo=github)
+![Camada Orchestrator](https://img.shields.io/badge/Camada-Process%20Orchestrator-00D2FF?style=for-the-badge)
+![Versão](https://img.shields.io/badge/gbit--container-v0.0.0.1-brightgreen?style=for-the-badge)
+![CLI](https://img.shields.io/badge/CLI-Native%20Tool-orange?style=for-the-badge&logo=gnu-bash)
+
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Fullstack](https://img.shields.io/badge/Stack-Fullstack-FF4500?style=for-the-badge)
+![NPM Package](https://img.shields.io/badge/NPM-Project%20Management-CB3837?style=for-the-badge&logo=npm)
+![GBit DB Dados](https://img.shields.io/badge/Database-gbit--db--dados-4169E1?style=for-the-badge&logo=postgresql)
+
+</div>
+
+---
+
+## O que é?
+
+O GBit Container é um **orquestrador de processos nativo** integrante do **GBit Ecossistema** que substitui chamadas a Docker/Podman por gerenciamento direto de processos do sistema operacional via `subprocess` e `asyncio`. Cada serviço definido no `gbit.yml` roda como um subprocesso nativo com rastreamento de PID, injeção de variáveis de ambiente a partir do `.env.gbit`, verificação de portas via sockets Python, e healthchecks via probes TCP/porta.
+
+Funciona como **PM2 + Foreman** — levante stacks inteiras com um comando, monitore no dashboard, gerencie serviços individualmente. Tudo sem instalar um único container runtime.
+
+---
+
+📦 [Pacote no NPM](https://www.npmjs.com/package/gbit-container) · 💻 [Repositório no GitHub](https://github.com/Gislaine-programadora)
+
+
+
+## Instalação
+
+### Via npx (recomendado)
+
+```bash
+npx gbit-container
+
+
+# GBit Container v1.0.0
+
+**Orquestrador de Processos Nativo — Zero Docker, Zero Podman, Zero Dependências Externas**
+
+![GBit Container](https://img.shields.io/badge/version-1.0.0-blue) ![Python](https://img.shields.io/badge/python-3.9%2B-green) ![License](https://img.shields.io/badge/license-MIT-orange) ![No Docker](https://img.shields.io/badge/dependencies-zero-critical)
+
+---
+
+
+
+## Instalação
+
+### Via npx (recomendado)
+
+```bash
+npx gbit-container
+```
+
+### Via pip
+
+```bash
+pip install gbit-container
+```
+
+### Via clone com gbit-start
+
+```bash
+gbit-start  https://github.com/gislaine-programadora/gbit_container.git
+cd gbit-container
+pip install -e .
+pip install click rich flask pyyaml psutil
+```
+
+---
+
+## Início Rápido
+
+### 1. Inicializar um projeto
+
+```bash
+gbit-container init
+```
+
+Isso cria `gbit.yml` e `.env.gbit` no diretório atual.
+
+### 2. Escolher um stack
+
+
+```bash
+gbit-container init --stack gbit-db --force
+```
+ ##  ou 
+
+```bash
+gbit-container stack gbit-db
+```
+
+Veja os 15+ templates disponíveis e escolha um:
+
+
+## Available Stack Templates
+
+| Stack | Descrição |
+|---|---|
+| `gbit-db` | GBit Database com Next.js + Database Engine + Portal AI |
+| `node-fullstack` | Aplicação fullstack Next.js + API Express + MongoDB |
+| `fastapi-backend` | API Python com FastAPI + Uvicorn + PostgreSQL |
+| `go-microservices` | Microsserviços Go com gRPC + REST + Redis |
+| `spring-backend` | API Java Spring Boot + PostgreSQL + Redis |
+| `rust-backend` | API Rust Axum + PostgreSQL |
+| `laravel-fullstack` | App PHP Laravel + Vue.js + MySQL |
+| `rails-fullstack` | App Ruby on Rails + PostgreSQL + Redis |
+| `dotnet-backend` | API .NET 8 + SQL Server + Redis |
+| `minimal` | Serviço único com Node.js — ideal para protótipos rápidos |
+| `mongo-express` | MongoDB com painel Express para visualização de dados |
+| `postgres-pgadmin` | PostgreSQL com pgAdmin para gerenciamento visual |
+| `redis-insight` | Redis com RedisInsight para monitoramento visual |
+| `mysql-phpmyadmin` | MySQL com phpMyAdmin para gerenciamento de banco |
+| `nats-streaming` | NATS Server com Streaming para mensageria leve |
+| `ai-fullstack` | Stack AI com FastAPI + Ollama + Qdrant + Redis + Streamlit |
+
+## opcao stack  gbit-db 
+
+```bash
+npx gbit-db "my-project"
+```
+
+---## 📦 Stack GBit-DB
+
+A stack `gbit-db` roda 3 serviços:
+
+
+| Serviço | Porta | Descrição |
+|---------|-------|-----------|
+| app | :3000 | Aplicação principal |
+| gbit-database | :4200 | Banco de dados gbit-db-dados |
+| portal | :4100 | Portal de administração |
+
+```bash
+gbit-container init --stack gbit-db
+```
+
+
+```bash
+gbit-container init --stack node-fullstack
+```
+
+```bash
+gbit-container init --stack ai-fullstack
+```
+
+# E para visualizar todas:
+
+```bash
+gbit-container stacks
+```
+
+## Banco de Dados rapido para quqlquer projeto
+
+```bash
+npx gbit-db-dados
+```
+
+```bash
+npm install gbit-db-dados
+```
+
+### 3. Subir os serviços container
+
+```bash
+gbit-container up
+```
+
+Todos os serviços definidos no `gbit.yml` iniciam como subprocessos nativos.
+
+### 5. Acompanhar no Dashboard
+
+```bash
+gbit-container dashboard
+```
+
+Abre o dashboard web com visualização em tempo real dos serviços, logs, stats e gerenciamento.
+
+---
+
+
+## Dashboard app web
+
+<p align="center">
+  <img src="assets/gbit-container-dashboard.png" width="1200">
+</p>
+
+
+
+## Referência de Comandos
+
+| Comando | Descrição |
+|---|---|
+| `init` | Inicializa `gbit.yml` e `.env.gbit` |
+| `up` | Sube todos os serviços (subprocessos nativos) |
+| `down` | Para todos os serviços |
+| `start <serviço>` | Inicia um serviço específico |
+| `stop <serviço>` | Para um serviço específico |
+| `restart <serviço>` | Reinicia um serviço específico |
+| `pause <serviço>` | Suspende (SIGSTOP) um serviço |
+| `unpause <serviço>` | Retoma (SIGCONT) um serviço pausado |
+| `ps` | Lista serviços rodando com PID, porta, status |
+| `status` | Status geral do orquestrador |
+| `stats` | Estatísticas de recursos (CPU, memória) por serviço |
+| `logs [serviço]` | Exibe logs (stdout/stderr) dos serviços |
+| `exec <serviço> <cmd>` | Executa um comando no contexto do serviço |
+| `shell <serviço>` | Abre shell interativo no contexto do serviço |
+| `info` | Informações do sistema e do orquestrador |
+| `stacks` | Lista stacks/templates disponíveis |
+| `stack  <nome>` | Aplica um stack ao `gbit.yml` |
+| `build` | Executa build_cmd dos serviços que o definem |
+| `pull` | Informativo — verifica requisitos dos serviços |
+| `images` | Lista serviços com seus comandos e portas |
+| `volume ls` | Lista volumes (diretórios de dados) |
+| `volume create <nome>` | Cria um volume (diretório de dados) |
+| `volume rm <nome>` | Remove um volume |
+| `network ls` | Lista redes virtuais (informativo) |
+| `scale <serviço> <N>` | Escala um serviço para N instâncias |
+| `inspect <serviço>` | Detalhes de instâncias de um serviço |
+| `dashboard` | Inicia o dashboard web |
+
+---
+
+## Formato gbit.yml
+
+```yaml
+version: "2"
+
+services:
+  api:
+    start_cmd: python -m uvicorn main:app --host 0.0.0.0 --port 8000
+    build_cmd: pip install -r requirements.txt
+    port: 8000
+    env:
+      DATABASE_URL: postgresql://user:pass@localhost:5432/mydb
+    healthcheck:
+      type: tcp
+      port: 8000
+      interval: 10
+      retries: 3
+    volumes:
+      - ./data/api:/app/data
+    workdir: ./api
+
+  worker:
+    start_cmd: celery -A tasks worker --loglevel=info
+    env:
+      BROKER_URL: redis://localhost:6379/0
+    workdir: ./worker
+
+  nginx:
+    start_cmd: nginx -g 'daemon off;'
+    port: 80
+    healthcheck:
+      type: tcp
+      port: 80
+
+volumes:
+  api-data:
+    path: ./data/api
+
+networks:
+  default:
+    name: gbit-net
+```
+
+### Campos do Serviço
+
+| Campo | Tipo | Descrição |
+|---|---|---|
+| `start_cmd` | string | Comando para iniciar o processo (obrigatório) |
+| `build_cmd` | string | Comando de build (opcional) |
+| `port` | int | Porta principal do serviço |
+| `env` | dict | Variáveis de ambiente (merge com `.env.gbit`) |
+| `healthcheck` | dict | Configuração de healthcheck (`type: tcp/port`) |
+| `volumes` | list | Diretórios de dados montados |
+| `workdir` | string | Diretório de trabalho do subprocesso |
+| `runtime` | string | Runtime a usar (padrão: `native`) |
+
+---
+
+## ProcessEngine — Como Funciona
+
+O coração do GBit Container v1.0.0 é o **ProcessEngine**, um orquestrador de processos nativo:
+
+1. **Leitura da Config**: Carrega `gbit.yml` + `.env.gbit` (variáveis de ambiente)
+2. **Verificação de Portas**: Antes de iniciar, verifica se a porta está livre via socket Python
+3. **Início de Subprocesso**: Cada serviço roda como `asyncio.create_subprocess_exec()`
+4. **Rastreamento de PID**: PIDs são salvos em `.gbit/pids.json` para persistência
+5. **Healthchecks**: Probes TCP/porta periódicos marcam o serviço como `healthy`
+6. **Logs**: stdout/stderr são capturados em `.gbit/logs/<serviço>.log`
+7. **Sinais**: `stop` = SIGTERM + SIGKILL, `pause` = SIGSTOP, `unpause` = SIGCONT
+8. **Restart**: Para o processo existente e inicia um novo
+9. **Scale**: Cria N instâncias do mesmo serviço com chaves incrementais
+10. **Dashboard**: Flask serve a UI web que consulta o ProcessEngine em tempo real
+
+---
+
+## Estrutura de Arquivos
+
+```
+gbit-container/
+├── bin/
+│   ├── gbit-container          # Shell entry point
+│   └── gbit-container.js       # Node.js entry point
+├── gbit_container/
+│   ├── __init__.py             # v2.0.0
+│   ├── core/
+│   │   ├── engine.py           # ProcessEngine — orquestrador principal
+│   │   ├── runtime.py          # Detecção de plataforma, stats, portas
+│   │   └── stacks.py           # 15+ templates de stacks
+│   ├── cli/
+│   │   └── main.py             # CLI Click — todos os comandos
+│   ├── dashboard/
+│   │   ├── app.py              # Flask app do dashboard
+│   │   ├── templates/
+│   │   │   └── dashboard.html  # UI principal
+│   │   └── static/
+│   │       └── js/
+│   │           └── dashboard.js  # Lógica do frontend
+│   ├── utils/
+│   │   ├── config.py           # Parser de gbit.yml / .env.gbit
+│   │   └── helpers.py          # Utilitários gerais
+│   └── templates/
+│       ├── gbit-db/            # Template de banco
+│       ├── web-basic/          # Stack: web básico
+│       ├── ai-fullstack/       # Stack: IA completa
+│       └── ...                 # Demais stacks
+├── pyproject.toml
+├── package.json
+└── README.md
+```
+
+---
+
+## .gbit/ (Dados do Projeto)
+
+Ao rodar `gbit-container up`, o diretório `.gbit/` é criado automaticamente:
+
+```
+.gbit/
+├── pids.json          # {"api:1": 12345, "worker:1": 12346, ...}
+├── logs/
+│   ├── api.log        # stdout + stderr do serviço api
+│   └── worker.log
+├── status.json        # Estado atual de todos os serviços
+└── ports.json         # Mapeamento serviço → porta
+```
+
+---
+
+## Dashboard Web
+
+O dashboard oferece uma interface moderna para gerenciar seus serviços:
+
+- **Visão geral** de todos os serviços com status, PID, porta, uptime
+- **Logs em tempo real** por serviço
+- **Ações**: start, stop, restart, pause, unpause
+- **Estatísticas** de CPU e memória por processo
+- **Stacks**: visualize e aplique templates
+- **Interface responsiva** — funciona em desktop e mobile
+
+Para iniciar:
+
+```bash
+gbit-container dashboard
+# ou com porta customizada:
+gbit-container dashboard --port 3000
+```
+
+---
+
+## Comparação com Outras Ferramentas
+
+| Recurso | GBit Container | PM2 | Foreman | Docker Compose |
+|---|---|---|---|---|
+| Dashboard Web | Sim | Sim (pay) | Não | Não |
+| Templates de Stack | 15+ | Não | Não | Não |
+| CLI completa | Sim | Sim | Básico | Sim |
+| Zero dependências | Sim | Node.js | Ruby | Docker |
+| Healthchecks TCP | Sim | Não | Não | Sim |
+| Escala de processos | Sim | Sim | Não | Sim (containers) |
+| Persistência de PID | Sim | Sim | Não | Não aplica |
+
+---
+
+## Requisitos
+
+- **Python 3.9+**
+- **Node.js 14+** (para npx)
+- Nenhum runtime de container necessário
+
+---
+
+## Licença
+
+MIT
+
+## autor 
+
+# email - gislainelophes@gmail.com
+gbit-ecossistema open source

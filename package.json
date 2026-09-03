@@ -1,0 +1,36 @@
+{
+  "name": "gbit-container",
+  "version": "0.0.1",
+  "description": "Modern native process orchestrator with a web dashboard — zero Docker/Podman dependencies. Init, up, down, status, logs, exec, dashboard and more",
+  "main": "bin/gbit-container",
+  "bin": {
+    "gbit-container": "bin/gbit-container.js"
+  },
+  "scripts": {
+    "start": "node bin/gbit-container.js dashboard",
+    "gbit": "node bin/gbit-container.js"
+  },
+  "keywords": [
+    "process-manager",
+    "orchestrator",
+    "subprocess",
+    "pm2-like",
+    "foreman",
+    "dashboard",
+    "devops",
+    "cli",
+    "devtools"
+  ],
+  "author": "gbit",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "os": [
+    "linux",
+    "darwin",
+    "win32"
+  ],
+  "preferGlobal": true,
+  "dependencies": {}
+}
