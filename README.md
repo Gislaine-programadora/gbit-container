@@ -69,15 +69,6 @@ npm install gbit-container
 pip install gbit-container
 ```
 
-### Via clone com gbit-start
-
-```bash
-npx gbit-start  https://github.com/gislaine-programadora/gbit_container.git
-cd gbit-container
-pip install -e .
-pip install click rich flask pyyaml psutil
-```
-
 ---
 
 ## Início Rápido
@@ -436,6 +427,16 @@ O `gbit-db-dados` roda dentro do próprio `gbit-database` — não é um serviç
 MIT
 
 ## autor 
+
+
+### Via clone com gbit-start
+
+```bash
+npx gbit-start  https://github.com/gislaine-programadora/gbit_container.git
+cd gbit-container
+pip install -e .
+pip install click rich flask pyyaml psutil
+```
 
 # email - gislainelophes@gmail.com
 gbit-ecossistema open source
