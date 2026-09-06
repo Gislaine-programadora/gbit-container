@@ -42,7 +42,7 @@ Funciona como **PM2 + Foreman** — levante stacks inteiras com um comando, moni
 ### Via npx (recomendado)
 
 ```bash
-npm install gbit-container
+npm install gbit-container 
 
 
 # GBit Container v0.0.1
