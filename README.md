@@ -117,11 +117,13 @@ Veja os 15+ templates disponíveis e escolha um:
 | `nats-streaming` | NATS Server com Streaming para mensageria leve |
 | `ai-fullstack` | Stack AI com FastAPI + Ollama + Qdrant + Redis + Streamlit |
 
-## Opcao stack  gbit-db 
+## Opcao stack  gbit-db / baixe a pasta pronta com next.js e banco gbit-db-dados, Backend completo abaixo:
 
 ```bash
 npx gbit-db "my-project"
 ```
+
+# Depois de baixar o backend completo npx gbit-db, escolhe o stack gbit-db do gbit-container:
 
 ---## 📦 Stack GBit-DB
 
@@ -138,6 +140,7 @@ A stack `gbit-db` roda 3 serviços:
 gbit-container init --stack gbit-db
 ```
 
+# Opcoes de Stacks gbit-container:
 
 ```bash
 gbit-container init --stack node-fullstack
