@@ -60,7 +60,7 @@ npm install gbit-container
 ### Via npx (recomendado)
 
 ```bash
-npx gbit-container
+npm install gbit-container
 ```
 
 ### Via pip
@@ -72,7 +72,7 @@ pip install gbit-container
 ### Via clone com gbit-start
 
 ```bash
-gbit-start  https://github.com/gislaine-programadora/gbit_container.git
+npx gbit-start  https://github.com/gislaine-programadora/gbit_container.git
 cd gbit-container
 pip install -e .
 pip install click rich flask pyyaml psutil
