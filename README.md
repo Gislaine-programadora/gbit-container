@@ -153,7 +153,7 @@ gbit-container init --stack ai-fullstack
 gbit-container stacks
 ```
 
-## Banco de Dados rapido para quqlquer projeto
+## Banco de Dados rapido para quqlquer projeto/Integra com qualquer Backend:
 
 ```bash
 npx gbit-db-dados
